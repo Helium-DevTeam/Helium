@@ -30,7 +30,7 @@
     <ClCompile Include="event\helium\Helium.Events.Helium.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="event\Helium.Events.EventManager.ixx">
+    <ClCompile Include="event\Helium.Events.EventEmitter.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="event\Helium.Events.ixx">
@@ -55,6 +55,18 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="main\Helium.Main.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="event\Helium.Events.Concepts.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="event\Helium.Events.ListenerStream.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="event\Helium.Events.EventManager.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="event\Helium.Events.EventEmitterPolicy.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
