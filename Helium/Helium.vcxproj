@@ -22,6 +22,7 @@
     <ClCompile Include="base\Helium.Base.HeliumObject.ixx" />
     <ClCompile Include="base\Helium.Base.ixx" />
     <ClCompile Include="base\Helium.Base.Version.ixx" />
+    <ClCompile Include="command\Helium.Command.ixx" />
     <ClCompile Include="config\Helium.Config.ixx" />
     <ClCompile Include="event\Helium.Events.Concepts.ixx" />
     <ClCompile Include="event\Helium.Events.EventEmitter.ixx" />

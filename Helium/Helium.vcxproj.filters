@@ -75,5 +75,8 @@
     <ClCompile Include="utils\Helium.Utils.OverloadSet.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="command\Helium.Command.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

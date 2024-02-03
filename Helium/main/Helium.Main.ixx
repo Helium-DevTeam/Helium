@@ -5,6 +5,7 @@ module;
 export module Helium.Main;
 
 export import Helium.Base;
+export import Helium.Command;
 export import Helium.Config;
 export import Helium.Events;
 export import Helium.Logger;
@@ -22,11 +23,6 @@ namespace helium::main {
 export namespace helium::main {
 	auto heliumMain(int argc, const char* argv[]) 
 		-> cob::task<int> {
-		std::variant<int, float, char> v(42);
-		std::visit(v, utils::OverloadSet{
-				[](int) {},
-				[](float) {}
-			});
 		co_return 0;
 	}
 }

@@ -13,7 +13,7 @@ namespace helium::utils::details {
 }
 
 export namespace helium::utils {	
-	template <std::invocable ... Ts>
+	template <typename ... Ts>
 	struct OverloadSet : public Ts... {
 		using Ts::operator()...;
 
@@ -27,7 +27,4 @@ export namespace helium::utils {
 			); 
 		}
 	};
-
-	template<std::invocable... Ts> 
-	OverloadSet(Ts...) -> OverloadSet<Ts...>;
 }
