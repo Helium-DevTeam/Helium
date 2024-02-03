@@ -1,16 +1,5 @@
 module;
 
-#define SPDLOG_HEADER_ONLY
-
-#include <chrono>
-#include <ctime>
-
-//this part of code is used to fix a bug of MSVC.
-//the use of non-preprocessor command in the global module
-//is not permitted by the ISO C++ Standard.
-//If future MSVC version fix the compiler bug that this line should be removed.
-using namespace std::chrono;	
-
 #include <spdlog/spdlog.h>
 #include <spdlog/sinks/stdout_color_sinks.h>
 #include <spdlog/sinks/daily_file_sink.h>

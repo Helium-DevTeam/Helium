@@ -2,13 +2,35 @@ module;
 
 export module Helium.Events.EventEmitterPolicy;
 
+import <concepts>;
+
+import Helium.Events.Concepts;
+
 export namespace helium::events {
-	template 
-		<
-			template <typename> class ... Mixins
-		>
+	template <template <typename> class ... Mixins>
 	struct EventEmitterMixinList
 	{};
+}
+
+export namespace helium::events::internal {
+	template <EventEmitterPolicy Policy>
+	consteval auto hasTypeMixins() -> bool {
+		if constexpr(requires { Policy::Mixins; }) {
+			return true;
+		}
+		return false;
+	}
+
+	template <EventEmitterPolicy Policy, bool>
+	struct SelectMixins 
+	{
+		using Type = Policy::Mixins;
+	};
+	template <EventEmitterPolicy Policy>
+	struct SelectMixins<Policy, false>
+	{
+		using Type = EventEmitterMixinList<>;
+	};
 
 	template 
 		<
@@ -25,7 +47,7 @@ export namespace helium::events {
 		> 
 	struct InheritFromMixins<Base, EventEmitterMixinList<T, Args...>>
 	{
-		using Type = T<InheritFromMixins<Base, EventEmitterMixinList<Args...>>>::Type;
+		using Type = T<typename InheritFromMixins<Base, EventEmitterMixinList<Args...>>::Type>;
 	};
 
 	template <typename Base>
@@ -33,8 +55,4 @@ export namespace helium::events {
 	{
 		using Type = Base;
 	};
-
-	template <typename ... Policies>
-	struct EventEmitterPolicyList 
-	{};
 }

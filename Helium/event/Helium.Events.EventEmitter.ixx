@@ -4,6 +4,8 @@ module;
 	#define BOOST_UUID_RANDOM_PROVIDER_FORCE_WINCRYPT
 #endif
 
+#include <boost/mp11.hpp>
+
 #include <boost/uuid/uuid.hpp>
 #include <boost/uuid/uuid_generators.hpp>
 
@@ -18,157 +20,78 @@ import <string>;
 import Helium.Events.Concepts;
 import Helium.Events.EventEmitterPolicy;
 
-export namespace helium::events {
+export namespace helium::events::internal {
 	template 
 		<
-			EventEmitterPolicy _Policies = EventEmitterPolicyList<>,
-			EventEmitterMixin _Mixins = EventEmitterMixinList<>
+			EventEmitterPolicy _Policy,
+			typename _MixinRoot
 		>
-	class EventEmitterBase 
+	class EventEmitterBase
 	{
 	protected:
-		using ThisType = EventEmitterBase<_Policies, _Mixins>;
+		using ThisType = EventEmitterBase<_Policy, _MixinRoot>;
 
-		using Policies = _Policies;
+		using MixinRoot = typename std::conditional_t<
+			std::same_as<_MixinRoot, void>,
+			ThisType,
+			_MixinRoot
+		>;
 
-		using Mixins = _Mixins;
-	};
+		using Policy = _Policy;
 
-	template 
-		<
-			EventEmitterPolicy _Policies = EventEmitterPolicyList<>,
-			EventEmitterMixin _Mixins = EventEmitterMixinList<>
-		>
-	class EventEmitter : public InheritFromMixins<EventEmitterBase<_Policies, _Mixins>, _Mixins>::Type {
-	private:
-		using super = InheritFromMixins<EventEmitterBase<_Policies, _Mixins>, _Mixins>::Type;
+		using Mixins = typename SelectMixins<
+			Policy,
+			internal::hasTypeMixins<Policy>()
+		>::Type;
+
 	public:
+		EventEmitterBase() = default;
+		EventEmitterBase(EventEmitterBase const& that) = default;
+		EventEmitterBase(EventEmitterBase && that) noexcept = default;
+		auto operator=(EventEmitterBase const& that) -> EventEmitterBase& = default;
+		auto operator=(EventEmitterBase && that) noexcept -> EventEmitterBase& = default;
 	};
-
-	template <typename Base> struct A : public Base {int a;};
-	template <typename Base> struct B : public Base {double b;};
-	template <typename Base> struct C : public Base {bool c;};
-
-	void foo() {
-		EventEmitter<EventEmitterPolicyList<>, EventEmitterMixinList<A, B, C>> emitter;
-	}
 }
 
-/*
-export namespace helium::events
-{
-	template <typename EventType>
-	concept Event = requires() {
-		{ EventType::getName() }	-> std::convertible_to<std::string>;
-	};
-
-	template <typename EventType>
-	concept CancellableEvent = Event<EventType> && requires(EventType e, bool b) {
-		{ e.isCancelled() }			-> std::same_as<bool>;
-		{ e.setCancelled(b) }		-> std::same_as<void>;
-		{ e.cancel() }				-> std::same_as<void>;
-	};
-
-	template <typename ListenerType, typename EventType>
-	concept EventListener = requires(ListenerType l, EventType& e) {
-		{ l.handle(e) }				-> std::same_as<void>;
-		{ l.getPriority() }			-> std::same_as<std::size_t>;
-	};
-
-	class EventManager {
+export namespace helium::events {
+	template <EventEmitterPolicy _Policy>
+	class EventEmitter
+		: public 
+		internal::InheritFromMixins<
+			internal::EventEmitterBase<_Policy, void>, 
+			typename internal::SelectMixins<_Policy, internal::hasTypeMixins<_Policy>()>::Type
+		>::Type 
+	{
 	private:
-		struct Handler_ {
-			std::size_t priority;
-			boost::uuids::uuid uuid;
-			std::function<void(std::any)> handler;
-			[[nodiscard]] constexpr auto operator<=>(Handler_ const& that) const noexcept -> std::strong_ordering {
-				return this->priority <=> that.priority;
-			}
-		};
-		std::unordered_map<std::string, std::vector<Handler_>> event_map_;
-		mutable std::mutex mutex_;
-
-		EventManager() = default;
-
+		using super = internal::InheritFromMixins<
+			internal::EventEmitterBase<_Policy, void>, 
+			typename internal::SelectMixins<_Policy, internal::hasTypeMixins<_Policy>()>::Type
+		>::Type;
 	public:
-		using Handle = boost::uuids::uuid;
-
-		[[nodiscard]] static auto getInstance() -> EventManager& {
-			static EventManager instance;
-			return instance;
-		}
-
-		template <Event EventType, EventListener<EventType> ListenerType>
-		auto registerEventListener(ListenerType & listener) -> Handle {
-			std::lock_guard<std::mutex> lock(this->mutex_);
-
-			Handle listener_handle = boost::uuids::random_generator()();
-
-			this->event_map_[EventType::getName()].push_back(
-				Handler_{
-					listener.getPriority(),
-					listener_handle,
-					std::function<void(std::any)>(
-						[&listener](std::any event) {
-							listener.handle(std::any_cast<EventType&>(event));
-						}
-					)
-				}
-			);
-
-			std::ranges::sort(this->event_map_[EventType::getName()], std::less<Handler_>{});
-
-			return listener_handle;
-		}
-
-		template <Event EventType>
-		auto registerEventListener(std::function<void(EventType&)> const& listener, std::size_t priority = 0) -> Handle {
-			std::lock_guard<std::mutex> lock(this->mutex_);
-
-			Handle listener_handle = boost::uuids::random_generator()();
-
-			this->event_map_[EventType::getName()].push_back(
-				Handler_{
-					priority,
-					listener_handle,
-					std::function<void(std::any)>(
-						[listener](std::any event) {
-							listener(std::any_cast<EventType&>(event));
-						}
-					)
-				}
-			);
-
-			std::ranges::sort(this->event_map_[EventType::getName()], std::less<Handler_>{});
-
-			return listener_handle;
-		}
-
-		template <Event EventType>
-		auto unregisterEventListener(Handle const& handle) -> void 
-		{
-			std::lock_guard<std::mutex> lock(this->mutex_);
-
-			this->event_map_[EventType::getName()] | std::ranges::remove_if(
-				[&handle](Handler_ const& event_) {
-					if(event_.uuid == handle) {
-						return true;
-					}
-				}
-			);
-		}
-
-		template <Event EventType>
-		auto triggerEvent(EventType & event) -> void {
-			for(auto& handler : this->event_map_[EventType::getName()]) {
-				handler.handler(event);
-				if constexpr(CancellableEvent<EventType>) {
-					if(event.isCancelled()) {
-						return ;
-					}
-				}
-			}
-			return ;
-		}
+		using super::super;
 	};
-}*/
+
+	template <typename Base> struct A : public Base 
+	{
+		using super = Base;
+		int a() { return 0; };
+	};
+	template <typename Base> struct B : public Base 
+	{
+		using super = Base;
+		double b() { return 1.0f; };
+	};
+	template <typename Base> struct C : public Base 
+	{
+		using super = Base;
+		bool c() { return true; };
+	};
+	struct MyPolicy {
+		using Mixins = EventEmitterMixinList<A, B, C>;
+	};
+
+	void foo() {
+		EventEmitter<MyPolicy> emitter;
+		//emitter.a();
+	}
+}

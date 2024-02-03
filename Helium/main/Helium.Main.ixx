@@ -1,5 +1,7 @@
 module;
 
+#include <boost/cobalt.hpp>
+
 export module Helium.Main;
 
 export import Helium.Base;
@@ -9,11 +11,27 @@ export import Helium.Logger;
 export import Helium.Modules;
 export import Helium.Utils;
 
-import <print>;
-import <string>;
+import <variant>;
 
-helium::logger::Logger logger = helium::logger::Logger::getLogger("Helium++");
+namespace cob = boost::cobalt;
 
-export auto main(int argc, const char* argv[]) -> int {
-	return 0;
+namespace helium::main {
+	//auto logger = logger::Logger::getLogger("MainThread");
+}
+
+export namespace helium::main {
+	auto heliumMain(int argc, const char* argv[]) 
+		-> cob::task<int> {
+		std::variant<int, float, char> v(42);
+		std::visit(v, utils::OverloadSet{
+				[](int) {},
+				[](float) {}
+			});
+		co_return 0;
+	}
+}
+
+export auto main(int argc, const char* argv[]) 
+	-> int {
+	return cob::run(helium::main::heliumMain(argc, argv));
 }
