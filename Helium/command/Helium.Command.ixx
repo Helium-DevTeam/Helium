@@ -7,8 +7,10 @@ export module Helium.Command;
 
 import Helium.Base;
 
+import <cstdint>;
 import <string>;
 import <string_view>;
+import <type_traits>;
 import <utility>;
 
 namespace helium::command::details {
@@ -18,6 +20,9 @@ namespace helium::command::details {
 		auto underlyingClass() -> Derived& { return static_cast<Derived&>(*this); }
 		auto underlyingClass() const -> Derived const& { return static_cast<Derived const&>(*this); }
 	};
+
+	struct TagCommandLiteral {};
+	struct TagCommandArgument {};
 }
 
 namespace helium::command {
@@ -28,6 +33,12 @@ namespace helium::command {
 export namespace helium::command::concepts {
 	template <typename Command>
 	concept IsCommandBase = std::derived_from<Command, CommandBase<Command>>;
+
+	template <typename Command>
+	concept IsCommandLiteral = std::derived_from<Command, details::TagCommandLiteral>;
+
+	template <typename Command>
+	concept IsCommandArgument = std::derived_from<Command, details::TagCommandArgument>;
 }
 
 export namespace helium::command {
@@ -40,15 +51,24 @@ export namespace helium::command {
 	};
 }
 
-export namespace helium::command {
+export namespace helium::command {	
 	template <typename Derived>
 	class CommandBase : public details::CRTPHelper<Derived> {
 	public:
 		template <typename Next>
-		[[nodiscard]] constexpr auto then(Next&& next_node) &&;
+		[[nodiscard]] constexpr auto then(Next&& next_node) && {
+			return Derived(std::move(this->underlyingClass()));
+		}
+
+		template <std::invocable Callback>
+			requires concepts::IsCommandArgument<Derived>
+		[[nodiscard]] constexpr auto execute(Callback&& callback) && {
+			return Derived(std::move(this->underlyingClass()));
+		}
 	};
 
-	class CommandStringLiteral : public CommandBase<CommandStringLiteral> {
+	class CommandStringLiteral
+		: public CommandBase<CommandStringLiteral>, details::TagCommandLiteral {
 	private:
 		std::string _string_literal;
 	public:
@@ -56,11 +76,13 @@ export namespace helium::command {
 		{}
 	};
 
-	template <typename Derived>
-	template <typename Next>
-	[[nodiscard]] constexpr auto CommandBase<Derived>::then(Next&& next_node) && {
-		return CommandStringLiteral(std::move(this->underlyingClass()));
-	}
+	template <std::integral IntegerType = std::int64_t>
+	class CommandArgumentInteger
+		: public CommandBase<CommandArgumentInteger<IntegerType>>, details::TagCommandArgument {
+	public:
+		constexpr CommandArgumentInteger()
+		{}
+	};
 }
 
 namespace helium::command::test {
@@ -72,7 +94,9 @@ namespace helium::command::test {
 
 			dispatcher.registerCommand(
 				CommandStringLiteral{"awa"}.then(
-					CommandStringLiteral{"owo"}
+					CommandStringLiteral{"owo"}.then(
+						CommandArgumentInteger{}
+					)
 				)
 			);
 		};
