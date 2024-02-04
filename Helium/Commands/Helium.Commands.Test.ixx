@@ -5,9 +5,11 @@ module;
 
 export module Helium.Commands.Test;
 
-import Helium.Commands.CommandDispatcher;
-import Helium.Commands.CommandLiteral;
-import Helium.Commands.CommandArgument;
+export import Helium.Commands.CommandArgument;
+export import Helium.Commands.CommandBase;
+export import Helium.Commands.CommandDispatcher;
+export import Helium.Commands.CommandLiteral;
+export import Helium.Commands.Concepts;
 
 namespace helium::commands::test {
 	using namespace boost::ut;
@@ -19,7 +21,7 @@ namespace helium::commands::test {
 			dispatcher.registerCommand(
 				CommandStringLiteral{"awa"}.then(
 					CommandStringLiteral{"owo"}.then(
-						CommandArgumentInteger{}
+						CommandArgumentInteger<std::uint64_t>{}
 					)
 				)
 			);

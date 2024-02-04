@@ -5,7 +5,7 @@ import Helium.Commands.Concepts;
 export namespace helium::commands {
 	class CommandDispatcher {
 	public:
-		template <concepts::IsCommandBase Command>
+		template <typename Command>
 		constexpr auto registerCommand(Command&& command) -> void {
 			
 		}
