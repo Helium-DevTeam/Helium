@@ -14,13 +14,13 @@ import <string>;
 import <limits>;
 
 export namespace helium::commands {
-	template <std::integral IntegerType = std::int64_t>
+	template <concepts::IsInteger IntegerType = std::int64_t>
 	struct IntegerBoundMin { IntegerType value = std::numeric_limits<IntegerType>::min(); };
 
-	template <std::integral IntegerType = std::int64_t>
+	template <concepts::IsInteger IntegerType = std::int64_t>
 	struct IntegerBoundMax { IntegerType value = std::numeric_limits<IntegerType>::max(); };
 
-	template <std::integral IntegerType_ = std::int64_t>
+	template <concepts::IsInteger IntegerType_ = std::int64_t>
 	class IntegerBound {
 	public:
 		using IntegerType = IntegerType_;
@@ -44,7 +44,7 @@ export namespace helium::commands {
 		{}
 	};
 
-	template <std::integral IntegerType_ = std::int64_t>
+	template <concepts::IsInteger IntegerType_ = std::int64_t>
 	class CommandArgumentInteger
 		: public CommandBase<CommandArgumentInteger<IntegerType_>>, public details::TagCommandArgument {
 	public:
