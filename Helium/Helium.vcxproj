@@ -22,9 +22,15 @@
     <ClCompile Include="Base\Helium.Base.HeliumObject.ixx" />
     <ClCompile Include="Base\Helium.Base.ixx" />
     <ClCompile Include="Base\Helium.Base.Version.ixx" />
+    <ClCompile Include="Commands\CommandArgument\Helium.Commands.CommandArgument.CommandArgumentInteger.ixx" />
     <ClCompile Include="Commands\CommandArgument\Helium.Commands.CommandArgument.ixx" />
+    <ClCompile Include="Commands\CommandBase\Helium.Commands.CommandBase.ixx" />
+    <ClCompile Include="Commands\CommandDispatcher\Helium.Commands.CommandDispatcher.ixx" />
+    <ClCompile Include="Commands\CommandLiteral\Helium.Commands.CommandLiteral.CommandStringLiteral.ixx" />
     <ClCompile Include="Commands\CommandLiteral\Helium.Commands.CommandLiteral.ixx" />
+    <ClCompile Include="Commands\Concepts\Helium.Commands.Concepts.ixx" />
     <ClCompile Include="Commands\Helium.Commands.ixx" />
+    <ClCompile Include="Commands\Helium.Commands.Test.ixx" />
     <ClCompile Include="Config\Helium.Config.ixx" />
     <ClCompile Include="Event\Helium.Events.Concepts.ixx" />
     <ClCompile Include="Event\Helium.Events.EventEmitter.ixx" />

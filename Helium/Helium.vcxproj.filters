@@ -84,5 +84,23 @@
     <ClCompile Include="Commands\CommandLiteral\Helium.Commands.CommandLiteral.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Commands\CommandArgument\Helium.Commands.CommandArgument.CommandArgumentInteger.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Commands\CommandBase\Helium.Commands.CommandBase.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Commands\CommandDispatcher\Helium.Commands.CommandDispatcher.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Commands\Concepts\Helium.Commands.Concepts.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Commands\CommandLiteral\Helium.Commands.CommandLiteral.CommandStringLiteral.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Commands\Helium.Commands.Test.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
