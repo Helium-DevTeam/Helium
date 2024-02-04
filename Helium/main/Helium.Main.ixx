@@ -5,7 +5,7 @@ module;
 export module Helium.Main;
 
 export import Helium.Base;
-export import Helium.Command;
+export import Helium.Commands;
 export import Helium.Config;
 export import Helium.Events;
 export import Helium.Logger;

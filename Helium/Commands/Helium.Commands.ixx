@@ -3,11 +3,15 @@ module;
 #define BOOST_UT_DISABLE_MODULE
 #include <boost/ut.hpp>
 
-export module Helium.Command;
+export module Helium.Commands;
+
+export import Helium.Commands.CommandArgument;
+export import Helium.Commands.CommandLiteral;
 
 import Helium.Base;
 
 import <cstdint>;
+import <limits>;
 import <string>;
 import <string_view>;
 import <type_traits>;
@@ -70,9 +74,39 @@ export namespace helium::command {
 	class CommandStringLiteral
 		: public CommandBase<CommandStringLiteral>, details::TagCommandLiteral {
 	private:
-		std::string _string_literal;
+		std::string string_literal_;
 	public:
-		constexpr CommandStringLiteral(std::string_view string_literal) : _string_literal(string_literal) 
+		constexpr CommandStringLiteral(std::string_view string_literal) : string_literal_(string_literal) 
+		{}
+	};
+
+	template <std::integral IntegerType = std::int64_t>
+	struct IntegerBoundMin { IntegerType value = std::numeric_limits<IntegerType>::min(); };
+
+	template <std::integral IntegerType = std::int64_t>
+	struct IntegerBoundMax { IntegerType value = std::numeric_limits<IntegerType>::max(); };
+
+	template <std::integral IntegerType_ = std::int64_t>
+	class IntegerBound {
+	public:
+		using IntegerType = IntegerType_;
+		using IntegerBoundMaxType = IntegerBoundMax<IntegerType>;
+		using IntegerBoundMinType = IntegerBoundMin<IntegerType>;
+
+	private:
+		IntegerBoundMaxType max_{};
+		IntegerBoundMinType min_{};
+
+	public:
+		constexpr IntegerBound(IntegerBoundMax max, IntegerBoundMin min) : max_(max), min_(min)
+		{}
+		constexpr IntegerBound(IntegerBoundMin min) : IntegerBound(IntegerBoundMaxType{}, min)
+		{}
+		constexpr IntegerBound(IntegerBoundMax max) : IntegerBound(max, IntegerBoundMinType{})
+		{}
+		constexpr IntegerBound(IntegerBoundMin min, IntegerBoundMax max) : IntegerBound(max, min) 
+		{}
+		constexpr IntegerBound() : IntegerBound(IntegerBoundMaxType{}, IntegerBoundMinType{})
 		{}
 	};
 

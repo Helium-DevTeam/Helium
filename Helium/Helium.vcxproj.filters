@@ -15,67 +15,73 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="base\Helium.Base.HeliumObject.ixx">
+    <ClCompile Include="Base\Helium.Base.HeliumObject.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="base\Helium.Base.ixx">
+    <ClCompile Include="Base\Helium.Base.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="base\Helium.Base.Version.ixx">
+    <ClCompile Include="Base\Helium.Base.Version.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="config\Helium.Config.ixx">
+    <ClCompile Include="Config\Helium.Config.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="event\helium\Helium.Events.Helium.ixx">
+    <ClCompile Include="Event\helium\Helium.Events.Helium.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="event\Helium.Events.EventEmitter.ixx">
+    <ClCompile Include="Event\Helium.Events.EventEmitter.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="event\Helium.Events.ixx">
+    <ClCompile Include="Event\Helium.Events.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="logger\Helium.Logger.ixx">
+    <ClCompile Include="Logger\Helium.Logger.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="modules\Helium.Modules.ixx">
+    <ClCompile Include="Modules\Helium.Modules.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="modules\Helium.Modules.Module.ixx">
+    <ClCompile Include="Modules\Helium.Modules.Module.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="modules\Helium.Modules.ModuleManager.ixx">
+    <ClCompile Include="Modules\Helium.Modules.ModuleManager.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="modules\Helium.Modules.ModuleMetadata.ixx">
+    <ClCompile Include="Modules\Helium.Modules.ModuleMetadata.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="utils\Helium.Utils.ixx">
+    <ClCompile Include="Utils\Helium.Utils.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="main\Helium.Main.ixx">
+    <ClCompile Include="Main\Helium.Main.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="event\Helium.Events.Concepts.ixx">
+    <ClCompile Include="Event\Helium.Events.Concepts.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="event\Helium.Events.ListenerStream.ixx">
+    <ClCompile Include="Event\Helium.Events.ListenerStream.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="event\Helium.Events.EventManager.ixx">
+    <ClCompile Include="Event\Helium.Events.EventManager.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="event\Helium.Events.EventEmitterPolicy.ixx">
+    <ClCompile Include="Event\Helium.Events.EventEmitterPolicy.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="event\Helium.Events.EventListener.ixx">
+    <ClCompile Include="Event\Helium.Events.EventListener.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="utils\Helium.Utils.OverloadSet.ixx">
+    <ClCompile Include="Utils\Helium.Utils.OverloadSet.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="command\Helium.Command.ixx">
+    <ClCompile Include="Commands\Helium.Commands.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Commands\CommandArgument\Helium.Commands.CommandArgument.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Commands\CommandLiteral\Helium.Commands.CommandLiteral.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
