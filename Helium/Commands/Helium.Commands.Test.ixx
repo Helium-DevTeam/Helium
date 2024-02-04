@@ -11,6 +11,8 @@ export import Helium.Commands.CommandDispatcher;
 export import Helium.Commands.CommandLiteral;
 export import Helium.Commands.Concepts;
 
+import <print>;
+
 namespace helium::commands::test {
 	using namespace boost::ut;
 
@@ -19,9 +21,25 @@ namespace helium::commands::test {
 			CommandDispatcher dispatcher;
 
 			dispatcher.registerCommand(
-				CommandStringLiteral{"awa"}.then(
-					CommandStringLiteral{"owo"}.then(
-						CommandArgumentInteger<std::uint64_t>{}
+				CommandStringLiteral{"#helium"}.then(
+					CommandStringLiteral{"user"}.then(
+						CommandArgumentInteger<std::uint64_t>{}.require(
+							[]() { 
+								return true; 
+							}
+						).execute(
+							[]() { 
+								std::println("awa"); 
+							}
+						)
+					)
+				).then(
+					CommandStringLiteral{"event"}.then(
+						CommandArgumentInteger<std::uint64_t>{}.execute(
+							[]() { 
+								std::println("owo"); 
+							}
+						)
 					)
 				)
 			);

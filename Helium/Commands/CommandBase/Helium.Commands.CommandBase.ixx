@@ -15,9 +15,10 @@ import <string>;
 import <plf_hive.h>;
 
 namespace helium::commands::details {
-	template <typename Derived>
+	template <typename Derived_>
 	class CRTPHelper {
 	public:
+		using Derived = Derived_;
 		auto underlyingClass() -> Derived& { return static_cast<Derived&>(*this); }
 		auto underlyingClass() const -> Derived const& { return static_cast<Derived const&>(*this); }
 	};
@@ -35,9 +36,11 @@ export namespace helium::commands {
 		pro::proxy<poly::CommandNodeFacade> self;
 	};
 
-	template <typename Derived>
-	class CommandBase : public details::CRTPHelper<Derived> {
+	template <typename Derived_>
+	class CommandBase : public details::CRTPHelper<Derived_> {
 	public:
+		using Derived = Derived_;
+
 		template <typename Next>
 		[[nodiscard]] constexpr auto then(Next&& next_node) && {
 			FWD(next_node).setParentNode(this->underlyingClass().getNodeDescriptor());
@@ -48,6 +51,11 @@ export namespace helium::commands {
 		template <std::invocable Callback>
 			requires concepts::IsCommandArgument<Derived>
 		[[nodiscard]] constexpr auto execute(Callback&& callback) && {
+			return Derived(std::move(this->underlyingClass()));
+		}
+
+		template <std::invocable Pred>
+		[[nodiscard]] constexpr auto require(Pred&& pred) && {
 			return Derived(std::move(this->underlyingClass()));
 		}
 	};

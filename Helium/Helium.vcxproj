@@ -22,7 +22,13 @@
     <ClCompile Include="Base\Helium.Base.HeliumObject.ixx" />
     <ClCompile Include="Base\Helium.Base.ixx" />
     <ClCompile Include="Base\Helium.Base.Version.ixx" />
+    <ClCompile Include="Commands\CommandArgument\Helium.Commands.CommandArgument.CommandArgumentBase.ixx" />
+    <ClCompile Include="Commands\CommandArgument\Helium.Commands.CommandArgument.CommandArgumentBoolean.ixx" />
+    <ClCompile Include="Commands\CommandArgument\Helium.Commands.CommandArgument.CommandArgumentFloatingPoint.ixx" />
+    <ClCompile Include="Commands\CommandArgument\Helium.Commands.CommandArgument.CommandArgumentGreedyString.ixx" />
     <ClCompile Include="Commands\CommandArgument\Helium.Commands.CommandArgument.CommandArgumentInteger.ixx" />
+    <ClCompile Include="Commands\CommandArgument\Helium.Commands.CommandArgument.CommandArgumentQuotedString.ixx" />
+    <ClCompile Include="Commands\CommandArgument\Helium.Commands.CommandArgument.CommandArgumentString.ixx" />
     <ClCompile Include="Commands\CommandArgument\Helium.Commands.CommandArgument.ixx" />
     <ClCompile Include="Commands\CommandBase\Helium.Commands.CommandBase.ixx" />
     <ClCompile Include="Commands\CommandDispatcher\Helium.Commands.CommandDispatcher.ixx" />
