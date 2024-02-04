@@ -1,10 +1,20 @@
+module;
+
+#include <proxy/proxy.h>
+
 export module Helium.Commands.Concepts;
 
 import <concepts>;
+import <string>;
 
 namespace helium::commands {
 	template <typename Derived>
 	class CommandBase;
+}
+
+export namespace helium::commands::poly {
+	PRO_DEF_MEMBER_DISPATCH(tryAcceptCommand, void(std::string_view));
+	PRO_DEF_FACADE(CommandNodeFacade, tryAcceptCommand);
 }
 
 export namespace helium::commands::details {

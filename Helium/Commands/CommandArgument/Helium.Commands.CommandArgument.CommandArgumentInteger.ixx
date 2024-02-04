@@ -46,7 +46,7 @@ export namespace helium::commands {
 
 	template <std::integral IntegerType_ = std::int64_t>
 	class CommandArgumentInteger
-		: public CommandBase<CommandArgumentInteger<IntegerType_>>, details::TagCommandArgument {
+		: public CommandBase<CommandArgumentInteger<IntegerType_>>, public details::TagCommandArgument {
 	public:
 		using IntegerType = IntegerType_;
 		using IntegerBoundType = IntegerBound<IntegerType>;

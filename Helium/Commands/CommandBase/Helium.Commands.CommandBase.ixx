@@ -24,12 +24,7 @@ namespace helium::commands::details {
 	};
 }
 
-export namespace helium::commands {	
-	namespace poly {
-		PRO_DEF_MEMBER_DISPATCH(tryAcceptCommand, void(std::string_view));
-		PRO_DEF_FACADE(CommandNodeFacade, tryAcceptCommand);
-	}
-
+export namespace helium::commands {
 	struct CommandNodeDescriptor {
 		std::shared_ptr<CommandNodeDescriptor> parent_node;
 		plf::hive<std::shared_ptr<CommandNodeDescriptor>> child_nodes;

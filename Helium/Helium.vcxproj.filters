@@ -117,8 +117,5 @@
     <ClCompile Include="Commands\CommandArgument\Helium.Commands.CommandArgument.CommandArgumentGreedyString.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Commands\CommandArgument\Helium.Commands.CommandArgument.CommandArgumentBase.ixx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
 </Project>
