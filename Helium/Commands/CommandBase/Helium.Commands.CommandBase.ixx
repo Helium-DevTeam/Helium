@@ -1,3 +1,8 @@
+/*
+ * Helium is an open source software distributed under the MIT license.
+ * Please refer to Helium.Main.ixx for full license info.
+ */
+
 module;
 
 #define FWD(x) ::std::forward<decltype(x)>(x)
