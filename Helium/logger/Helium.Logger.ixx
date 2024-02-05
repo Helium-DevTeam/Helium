@@ -5,6 +5,7 @@ module;
 #include <spdlog/sinks/daily_file_sink.h>
 
 export module Helium.Logger;
+export import Helium.Logger.Test;
 
 import Helium.Base;
 

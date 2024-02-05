@@ -1,6 +1,7 @@
 module;
 
 export module Helium.Config;
+export import Helium.Config.Test;
 
 import Helium.Base;
 

@@ -56,7 +56,7 @@ export namespace helium::commands::details {
 	struct IsStringTypeTrait : std::conditional_t<IsStdString<StrType_>, std::true_type, std::false_type> {};
 
 	template <typename StrType_>
-	constexpr bool IsStringTypeTraitV = IsIntegerTypeTrait<StrType_>::value;
+	constexpr bool IsStringTypeTraitV = IsStringTypeTrait<StrType_>::value;
 }
 
 export namespace helium::commands::concepts {

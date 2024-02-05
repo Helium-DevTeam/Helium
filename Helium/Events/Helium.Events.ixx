@@ -6,3 +6,4 @@ export import Helium.Events.EventEmitterPolicy;
 export import Helium.Events.EventListener;
 export import Helium.Events.EventManager;
 export import Helium.Events.Helium;
+export import Helium.Event.Test;

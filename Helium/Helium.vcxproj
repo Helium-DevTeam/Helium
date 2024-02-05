@@ -22,6 +22,7 @@
     <ClCompile Include="Base\Helium.Base.HeliumObject.ixx" />
     <ClCompile Include="Base\Helium.Base.ixx" />
     <ClCompile Include="Base\Helium.Base.Version.ixx" />
+    <ClCompile Include="Base\Test\Helium.Base.Test.ixx" />
     <ClCompile Include="Commands\CommandArgument\Helium.Commands.CommandArgument.CommandArgumentBoolean.ixx" />
     <ClCompile Include="Commands\CommandArgument\Helium.Commands.CommandArgument.CommandArgumentFloatingPoint.ixx" />
     <ClCompile Include="Commands\CommandArgument\Helium.Commands.CommandArgument.CommandArgumentGreedyString.ixx" />
@@ -38,22 +39,27 @@
     <ClCompile Include="Commands\Lexer\Helium.Commands.Lexer.ixx" />
     <ClCompile Include="Commands\Test\Helium.Commands.Test.ixx" />
     <ClCompile Include="Config\Helium.Config.ixx" />
-    <ClCompile Include="Event\Helium.Events.Concepts.ixx" />
-    <ClCompile Include="Event\Helium.Events.EventEmitter.ixx" />
-    <ClCompile Include="Event\Helium.Events.EventEmitterPolicy.ixx" />
-    <ClCompile Include="Event\Helium.Events.EventListener.ixx" />
-    <ClCompile Include="Event\Helium.Events.EventManager.ixx" />
-    <ClCompile Include="Event\Helium.Events.ixx" />
-    <ClCompile Include="Event\Helium.Events.ListenerStream.ixx" />
-    <ClCompile Include="Event\helium\Helium.Events.Helium.ixx" />
+    <ClCompile Include="Config\Test\Helium.Config.Test.ixx" />
+    <ClCompile Include="Events\Helium.Events.Concepts.ixx" />
+    <ClCompile Include="Events\Helium.Events.EventEmitter.ixx" />
+    <ClCompile Include="Events\Helium.Events.EventEmitterPolicy.ixx" />
+    <ClCompile Include="Events\Helium.Events.EventListener.ixx" />
+    <ClCompile Include="Events\Helium.Events.EventManager.ixx" />
+    <ClCompile Include="Events\Helium.Events.ixx" />
+    <ClCompile Include="Events\Helium.Events.ListenerStream.ixx" />
+    <ClCompile Include="Events\Helium\Helium.Events.Helium.ixx" />
+    <ClCompile Include="Events\Test\Helium.Events.Test.ixx" />
     <ClCompile Include="Logger\Helium.Logger.ixx" />
+    <ClCompile Include="Logger\Test\Helium.Logger.Test.ixx" />
     <ClCompile Include="Main\Helium.Main.ixx" />
     <ClCompile Include="Modules\Helium.Modules.ixx" />
     <ClCompile Include="Modules\Helium.Modules.Module.ixx" />
     <ClCompile Include="Modules\Helium.Modules.ModuleManager.ixx" />
     <ClCompile Include="Modules\Helium.Modules.ModuleMetadata.ixx" />
+    <ClCompile Include="Modules\Test\Helium.Modules.Test.ixx" />
     <ClCompile Include="Utils\Helium.Utils.ixx" />
     <ClCompile Include="Utils\Helium.Utils.OverloadSet.ixx" />
+    <ClCompile Include="Utils\Test\Helium.Utils.Test.ixx" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
