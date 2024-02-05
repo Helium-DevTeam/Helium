@@ -32,15 +32,15 @@ export namespace helium::commands {
 		IntegerBoundMinType min_{};
 
 	public:
-		constexpr IntegerBound(IntegerBoundMaxType max, IntegerBoundMinType min) : max_(max), min_(min)
+		constexpr explicit IntegerBound(IntegerBoundMaxType max, IntegerBoundMinType min) : max_(max), min_(min)
 		{}
-		constexpr IntegerBound(IntegerBoundMinType min) : IntegerBound(IntegerBoundMaxType{}, min)
+		constexpr explicit IntegerBound(IntegerBoundMinType min) : IntegerBound(IntegerBoundMaxType{}, min)
 		{}
-		constexpr IntegerBound(IntegerBoundMaxType max) : IntegerBound(max, IntegerBoundMinType{})
+		constexpr explicit IntegerBound(IntegerBoundMaxType max) : IntegerBound(max, IntegerBoundMinType{})
 		{}
-		constexpr IntegerBound(IntegerBoundMinType min, IntegerBoundMaxType max) : IntegerBound(max, min) 
+		constexpr explicit IntegerBound(IntegerBoundMinType min, IntegerBoundMaxType max) : IntegerBound(max, min) 
 		{}
-		constexpr IntegerBound() : IntegerBound(IntegerBoundMaxType{}, IntegerBoundMinType{})
+		constexpr explicit IntegerBound() : IntegerBound(IntegerBoundMaxType{}, IntegerBoundMinType{})
 		{}
 	};
 

@@ -36,21 +36,24 @@ export namespace helium::commands {
 	public:
 		using Derived = Derived_;
 
-		template <typename Next>
-		[[nodiscard]] constexpr auto then(Next&& next_node) && {
+		template <typename Next_>
+		[[nodiscard]]
+		constexpr auto then(Next_&& next_node) && {
 			FWD(next_node).setParentNode(this->underlyingClass().getNodeDescriptor());
 			this->underlyingClass().addChildNode(FWD(next_node).getNodeDescriptor());
 			return Derived(std::move(this->underlyingClass()));
 		}
 
-		template <std::invocable Callback>
+		template <std::invocable Callback_>
 			requires concepts::IsCommandArgument<Derived>
-		[[nodiscard]] constexpr auto execute(Callback&& callback) && {
+		[[nodiscard]]
+		constexpr auto execute(Callback_&& callback) && {
 			return Derived(std::move(this->underlyingClass()));
 		}
 
-		template <std::invocable Pred>
-		[[nodiscard]] constexpr auto require(Pred&& pred) && {
+		template <std::invocable Pred_>
+		[[nodiscard]]
+		constexpr auto require(Pred_&& pred) && {
 			return Derived(std::move(this->underlyingClass()));
 		}
 	};

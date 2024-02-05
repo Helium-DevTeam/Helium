@@ -6,3 +6,4 @@ export import Helium.Commands.CommandDispatcher;
 export import Helium.Commands.CommandLiteral;
 export import Helium.Commands.Concepts;
 export import Helium.Commands.Test;
+export import Helium.Commands.Lexer;

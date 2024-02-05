@@ -35,7 +35,8 @@
     <ClCompile Include="Commands\CommandLiteral\Helium.Commands.CommandLiteral.ixx" />
     <ClCompile Include="Commands\Concepts\Helium.Commands.Concepts.ixx" />
     <ClCompile Include="Commands\Helium.Commands.ixx" />
-    <ClCompile Include="Commands\Helium.Commands.Test.ixx" />
+    <ClCompile Include="Commands\Lexer\Helium.Commands.Lexer.ixx" />
+    <ClCompile Include="Commands\Test\Helium.Commands.Test.ixx" />
     <ClCompile Include="Config\Helium.Config.ixx" />
     <ClCompile Include="Event\Helium.Events.Concepts.ixx" />
     <ClCompile Include="Event\Helium.Events.EventEmitter.ixx" />

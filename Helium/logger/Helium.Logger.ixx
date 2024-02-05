@@ -29,11 +29,11 @@ export namespace helium::logger {
 		std::shared_ptr<spdlog::logger> logger_ptr_;
 
 		[[nodiscard]] static auto initLogger(std::string const& name) -> std::shared_ptr<spdlog::logger> {
-			static auto stdout_sink_
+			static auto stdout_sink
 				{std::make_shared<spdlog::sinks::stdout_color_sink_mt>()};
-			static auto file_sink_
+			static auto file_sink
 				{std::make_shared<spdlog::sinks::daily_file_sink_mt>("./logs/helium-log.log", 0, 0)};
-			auto vec = std::vector<spdlog::sink_ptr>{stdout_sink_, file_sink_};
+			auto vec = std::vector<spdlog::sink_ptr>{stdout_sink, file_sink};
 			auto logger_ptr = std::make_shared<spdlog::logger>(name, begin(vec), end(vec));
 			logger_ptr->set_pattern("[%Y-%m-%d %T.%e] [%^%l%$] %v");
 			spdlog::register_logger(logger_ptr);

@@ -38,21 +38,43 @@ export namespace helium::commands::details {
 
 	template <typename IType_>
 	constexpr bool IsIntegerTypeTraitV = IsIntegerTypeTrait<IType_>::value;
+
+	template <typename StrType_>
+	concept IsStdString = 
+		std::same_as<StrType_, std::string> or
+		std::same_as<StrType_, std::wstring> or
+		std::same_as<StrType_, std::u8string> or
+		std::same_as<StrType_, std::u16string> or
+		std::same_as<StrType_, std::u32string> or
+		std::same_as<StrType_, std::pmr::string> or
+		std::same_as<StrType_, std::pmr::wstring> or
+		std::same_as<StrType_, std::pmr::u8string> or
+		std::same_as<StrType_, std::pmr::u16string> or
+		std::same_as<StrType_, std::pmr::u32string>;
+
+	template <typename StrType_>
+	struct IsStringTypeTrait : std::conditional_t<IsStdString<StrType_>, std::true_type, std::false_type> {};
+
+	template <typename StrType_>
+	constexpr bool IsStringTypeTraitV = IsIntegerTypeTrait<StrType_>::value;
 }
 
 export namespace helium::commands::concepts {
-	template <typename Command>
-	concept IsCommandBase = std::derived_from<Command, CommandBase<Command>>;
+	template <typename Command_>
+	concept IsCommandBase = std::derived_from<Command_, CommandBase<Command_>>;
 
-	template <typename Command>
-	concept IsCommandLiteral = std::derived_from<Command, details::TagCommandLiteral>;
+	template <typename Command_>
+	concept IsCommandLiteral = std::derived_from<Command_, details::TagCommandLiteral>;
 
-	template <typename Command>
-	concept IsCommandArgument = std::derived_from<Command, details::TagCommandArgument>;
+	template <typename Command_>
+	concept IsCommandArgument = std::derived_from<Command_, details::TagCommandArgument>;
 
 	template <typename FPType_>
 	concept IsFloatingPoint = details::IsFloatingPointTypeTraitV<FPType_>;
 	
 	template <typename IType_>
 	concept IsInteger = details::IsIntegerTypeTraitV<IType_>;
+
+	template <typename StrType_>
+	concept IsString = details::IsStringTypeTraitV<StrType_>;
 }

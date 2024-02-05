@@ -99,7 +99,7 @@
     <ClCompile Include="Commands\CommandLiteral\Helium.Commands.CommandLiteral.CommandStringLiteral.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Commands\Helium.Commands.Test.ixx">
+    <ClCompile Include="Commands\Test\Helium.Commands.Test.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Commands\CommandArgument\Helium.Commands.CommandArgument.CommandArgumentFloatingPoint.ixx">
@@ -115,6 +115,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Commands\CommandArgument\Helium.Commands.CommandArgument.CommandArgumentGreedyString.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Commands\Lexer\Helium.Commands.Lexer.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -11,9 +11,11 @@ import <memory>;
 import <string>;
 
 export namespace helium::commands {
+	template <concepts::IsString StrType_>
 	class CommandArgumentString
-		: public CommandBase<CommandArgumentString>, public details::TagCommandArgument {
+		: public CommandBase<CommandArgumentString<StrType_>, public details::TagCommandArgument {
 	public:
+		using StringType = StrType_;
 		using super = CommandBase<CommandArgumentString>;
 
 	private:
