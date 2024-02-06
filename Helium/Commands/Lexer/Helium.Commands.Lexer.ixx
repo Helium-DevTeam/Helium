@@ -18,7 +18,7 @@ import <print>;
 import <span>;
 import <string>;
 
-import <plf_hive.h>;
+import <plf_colony.h>;
 
 import <gsl/gsl>;
 
@@ -65,7 +65,7 @@ export namespace helium::commands
 		using TokenType = Token<StringType>;
 	private:
 		StringType raw_command_;
-		plf::hive<TokenType> tokens_;
+		plf::colony<TokenType> tokens_;
 		typename StringType::const_iterator current_iterator_;
 
 	public:
@@ -80,16 +80,21 @@ export namespace helium::commands
 		{
 			this->raw_command_ = command;
 			this->current_iterator_ = this->raw_command_.cbegin();
+			this->tokens_.clear();
 			this->parseCommand();
 		}
 
 		auto parseCommand() -> void
 		{
 			std::println("Parsing Command : {}" , this->raw_command_);
-			while(auto next_token = this->getNextToken())
+
+			if(not this->raw_command_.empty()) 
 			{
-				this->tokens_.insert(next_token.value());
-				std::println("{}", next_token.value().toString());
+				while(auto next_token = this->getNextToken())
+				{
+					this->tokens_.insert(next_token.value());
+					std::println("{}", next_token.value().toString());
+				}
 			}
 		}
 

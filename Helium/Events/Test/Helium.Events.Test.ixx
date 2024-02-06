@@ -8,7 +8,9 @@ module;
 #define BOOST_UT_DISABLE_MODULE
 #include <boost/ut.hpp>
 
-export module Helium.Event.Test;
+export module Helium.Events.Test;
+
+import <print>;
 
 export namespace helium::events::test
 {
@@ -16,7 +18,7 @@ export namespace helium::events::test
 
 	auto testModule() -> void
 	{
-		"Helium.Events Module Test #1"_test = []
+		boost::ut::test("Helium.Events Module Test #1") = []
 		{
 			expect(true);
 		};

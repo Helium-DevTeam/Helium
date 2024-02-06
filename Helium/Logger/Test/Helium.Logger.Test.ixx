@@ -10,13 +10,15 @@ module;
 
 export module Helium.Logger.Test;
 
+import <print>;
+
 export namespace helium::logger::test
 {
 	using namespace boost::ut;
 
 	auto testModule() -> void
 	{
-		"Helium.Logger Module Test #1"_test = []
+		boost::ut::test("Helium.Logger Module Test #1") = []
 		{
 			expect(true);
 		};

@@ -10,13 +10,15 @@ module;
 
 export module Helium.Config.Test;
 
+import <print>;
+
 export namespace helium::config::test
 {
 	using namespace boost::ut;
 
 	auto testModule() -> void
 	{
-		"Helium.Config Module Test #1"_test = []
+		boost::ut::test("Helium.Config Module Test #1") = []
 		{
 			expect(true);
 		};

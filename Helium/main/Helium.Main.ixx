@@ -24,7 +24,7 @@
 
 module;
 
-#include <boost/cobalt.hpp>
+//#include <boost/cobalt.hpp>
 
 #include <cxxopts.hpp>
 
@@ -43,7 +43,7 @@ import <format>;
 import <exception>;
 import <variant>;
 
-namespace cob = boost::cobalt;
+//namespace cob = boost::cobalt;
 
 namespace helium::main {
 	//auto logger = logger::Logger::getLogger("MainThread");
@@ -51,32 +51,30 @@ namespace helium::main {
 
 export namespace helium::main {
 	auto heliumMain(int argc, const char* argv[]) 
-		-> cob::task<int> {
+		-> int {
 		cxxopts::Options options{"Helium", "A lightweight extension system for any console applications"};
 		options.add_options()
-			("t,test", "Execute tests", cxxopts::value<bool>()->default_value("true"))
+			("runTest", "Execute tests", cxxopts::value<bool>()->default_value("false"))
 		;
 		options.allow_unrecognised_options();
 
 		auto result = options.parse(argc, argv);
 		
-		if(result["test"].as<bool>())
+		if(result["runTest"].as<bool>())
 		{
-			//base::test::testModule();
+			base::test::testModule();
 			commands::test::testModule();
-			//config::test::testModule();
-			//events::test::testModule();
-			//logger::test::testModule();
-			//modules::test::testModule();
-			//utils::test::testModule();
+			config::test::testModule();
+			events::test::testModule();
+			logger::test::testModule();
+			modules::test::testModule();
+			utils::test::testModule();
 		}
-
-		co_return 0;
+		return 0;
 	}
 }
 
 export auto main(int argc, const char* argv[]) 
 	-> int {
-	helium::exceptions::setupExceptionHandlers();
-	return cob::run(helium::main::heliumMain(argc, argv));
+	return helium::main::heliumMain(argc, argv);
 }
