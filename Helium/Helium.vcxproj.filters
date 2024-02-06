@@ -138,5 +138,11 @@
     <ClCompile Include="Utils\Test\Helium.Utils.Test.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Exceptions\Helium.Exceptions.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Exceptions\TerminateHandler\Helium.Exceptions.TerminateHandler.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
